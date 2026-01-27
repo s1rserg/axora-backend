@@ -6,6 +6,7 @@ import { AppConfigModule } from '@infrastructure/app-config';
 import { AppJwtModule } from '@infrastructure/app-jwt-module';
 import { DatabaseModule } from '@infrastructure/database';
 import { AuthModule } from '@modules/auth';
+import { ProductModule } from '@modules/product/product.module';
 import { UserModule } from '@modules/user';
 
 import { AppService } from './app.service';
@@ -21,6 +22,7 @@ import { MediaModule } from './modules/media/media.module';
     UserModule,
     AuthModule,
     MediaModule,
+    ProductModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
