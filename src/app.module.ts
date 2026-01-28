@@ -11,6 +11,8 @@ import { UserModule } from '@modules/user';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
+import { CartModule } from './modules/cart/cart.module';
+import { FavoriteModule } from './modules/favorite/favorite.module';
 import { MediaModule } from './modules/media/media.module';
 
 @Module({
@@ -23,6 +25,8 @@ import { MediaModule } from './modules/media/media.module';
     AuthModule,
     MediaModule,
     ProductModule,
+    FavoriteModule,
+    CartModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],

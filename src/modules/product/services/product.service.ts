@@ -38,17 +38,7 @@ export class ProductService {
 
   async findAll(query: GetAllProductsQueryDto): Promise<Product[]> {
     const products = await this.productRepository.findAll(query);
-    const productIds = products.map((p) => p.id);
-
-    if (!productIds.length) return [];
-
-    const imagesMap = await this.productMediaService.getMainImagesForProducts(productIds);
-
-    return products.map((product) => ({
-      ...product,
-      mainImage: imagesMap.get(product.id) || null,
-      images: [],
-    }));
+    return this.populateMainImages(products);
   }
 
   async findOne(id: number): Promise<Product> {
@@ -62,5 +52,19 @@ export class ProductService {
       mainImage: images[0] || null,
       images: images,
     };
+  }
+
+  async populateMainImages(products: Product[]): Promise<Product[]> {
+    const productIds = products.map((p) => p.id);
+
+    if (!productIds.length) return [];
+
+    const imagesMap = await this.productMediaService.getMainImagesForProducts(productIds);
+
+    return products.map((product) => ({
+      ...product,
+      mainImage: imagesMap.get(product.id) || null,
+      images: [],
+    }));
   }
 }
